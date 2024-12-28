@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CargoZig</string>
+    <string name="title_activity_main">CargoZig</string>
+    <string name="package_name">io.cargozig.mobile</string>
+    <string name="custom_url_scheme">io.cargozig.mobile</string>
+</resources>
