@@ -7,7 +7,8 @@ export default defineConfig({
 		host: true
 	},
 	build: {
-		target: 'es2015'
-	}
+		target: 'es2015',
+		outDir: 'build'  // Specify the build output directory
+}
 });
 

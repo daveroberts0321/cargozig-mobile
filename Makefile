@@ -18,6 +18,9 @@ commit:
 		git commit -m "$(DATE) - Regular update" \
 	)
 
+push :
+	git push
+
 android: build
 	npx cap open android
 
