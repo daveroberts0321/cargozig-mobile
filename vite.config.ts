@@ -3,11 +3,14 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [sveltekit()],
-    server: {
-        host: true
+    resolve: {
+        alias: {
+            $lib: '/src/lib',
+            svelte: 'svelte'
+        }
     },
-    build: {
-        outDir: 'build'
+    ssr: {
+        noExternal: ['svelte', '@sveltejs/kit']
     }
 });
 
