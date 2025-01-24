@@ -42,6 +42,14 @@
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Handle clicking outside the menu to close it
+    function handleOutsideClick(event: MouseEvent) {
+        const target = event.target as HTMLElement;
+        if (target.closest('[role="navigation"]') === null && isMenuOpen) {
+            isMenuOpen = false;
+        }
+    }
 </script>
 
 <div class="min-h-screen bg-gray-100">
@@ -129,14 +137,25 @@
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
-            class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40" 
+            class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+            onclick={handleOutsideClick}
         >
             <div 
                 class="bg-white w-64 h-full"
                 role="navigation"
             >
-                <div class="p-4 bg-[#232f3e] text-white">
+                <div class="p-4 bg-[#232f3e] text-white flex justify-between items-center">
                     <div class="text-[#febd69] font-bold text-xl">Menu</div>
+                    <button 
+                        type="button"
+                        onclick={() => isMenuOpen = false}
+                        class="text-white hover:text-[#febd69]"
+                        aria-label="Close menu"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
                 <nav class="p-4 space-y-4">
                     <a 
@@ -243,7 +262,7 @@
                             <a href="/privacy" class="hover:text-[#febd69]">Privacy Notice</a>
                             <a href="/cookies" class="hover:text-[#febd69]">Cookie Policy</a>
                     </div>
-                    <p class="text-gray-400">© 2024 CargoZig. All rights reserved.</p>
+                    <p class="text-gray-400">© 2025 CargoZig. All rights reserved.</p>
             </div>
     </div>
 </footer>

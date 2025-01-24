@@ -7,7 +7,7 @@ CargoZig Mobile enables drivers to manage shipments, track locations, and proces
 ## Development Timeline & Checklist
 
 ### Phase 1: Core Infrastructure (Weeks 1-2)
-- [x] Project setup with SvelteKit and Capacitor
+- [x] Project setup with SvelteKit and Ionic Capacitor
 - [ ] Basic authentication system
 - [ ] Session management
 - [ ] Route protection
@@ -105,8 +105,7 @@ CargoZig Mobile enables drivers to manage shipments, track locations, and proces
 ```bash
 Node.js >= 18.0.0
 npm >= 8.0.0
-Xcode (for iOS)
-Android Studio (for Android)
+Sveltekit/Capacitor (mobile app development)
 Go >= 1.21 (for backend)
 ```
 
@@ -120,58 +119,6 @@ WEBSOCKET_URL=wss://api.cargozig.com/ws
 ```bash
 CIRCLE_API_KEY=your_api_key
 CIRCLE_ENVIRONMENT=sandbox|production
-```
-
-## Setup Instructions
-
-1. Clone the repository:
-```bash
-git clone https://github.com/cargozig/mobile-app.git
-cd mobile-app
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Configure environment:
-```bash
-cp .env.example .env
-# Edit .env with your settings
-```
-
-4. Run development server:
-```bash
-npm run dev
-```
-
-5. Build mobile apps:
-```bash
-# iOS
-npm run build
-npx cap sync
-npx cap open ios
-
-# Android
-npm run build
-npx cap sync
-npx cap open android
-```
-
-## Testing
-
-Run tests:
-```bash
-npm run test
-```
-
-## Deployment
-
-Build for production:
-```bash
-npm run build
-```
 
 ## Contributing
 1. Branch naming: feature/[feature-name] or fix/[fix-name]

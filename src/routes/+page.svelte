@@ -1,78 +1,241 @@
 <script lang="ts">
-import { onMount } from 'svelte';
-
-// State variables
-let activeLoads = $state(0);
-let availableLoads = $state(0);
-let walletBalance = $state('0.00');
-
-// Simulated data loading
-onMount(async () => {
-    // Replace with actual API calls
-    activeLoads = 2;
-    availableLoads = 15;
-    walletBalance = '2,500.00';
-});
-</script>
-
-<div class="space-y-6">
-    <!-- Quick Stats -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-lg font-semibold text-gray-700">Active Loads</h2>
-            <p class="text-3xl font-bold text-[#232f3e]">{activeLoads}</p>
-        </div>
+    import { onMount } from 'svelte';
+    import Icon from '@iconify/svelte';
+    
+    // Stats for animated counter
+    let stats = {
+        loads: 0,
+        carriers: 0,
+        radius: 0
+    };
+    
+    // Animate numbers on mount
+    onMount(() => {
+        const targetStats = { loads: 500, carriers: 150, radius: 150 };
+        const duration = 2000;
+        const steps = 50;
         
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-lg font-semibold text-gray-700">Available Loads</h2>
-            <p class="text-3xl font-bold text-[#232f3e]">{availableLoads}</p>
-        </div>
+        const interval = duration / steps;
+        let currentStep = 0;
         
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-lg font-semibold text-gray-700">Wallet Balance</h2>
-            <p class="text-3xl font-bold text-[#232f3e]">${walletBalance} USDC</p>
-        </div>
-    </div>
+        const timer = setInterval(() => {
+            currentStep++;
+            stats = {
+                loads: Math.floor((targetStats.loads / steps) * currentStep),
+                carriers: Math.floor((targetStats.carriers / steps) * currentStep),
+                radius: Math.floor((targetStats.radius / steps) * currentStep)
+            };
+            
+            if (currentStep >= steps) clearInterval(timer);
+        }, interval);
+    });
 
-    <!-- Quick Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <a 
-            href="/loads/available" 
-            class="bg-[#232f3e] text-white p-6 rounded-lg shadow hover:bg-[#37475A] transition-colors"
-        >
-            <h3 class="text-xl font-bold mb-2">Find Loads</h3>
-            <p class="text-gray-300">Browse available loads matching your route</p>
-        </a>
-        
-        <a 
-            href="/loads/active" 
-            class="bg-[#febd69] text-[#232f3e] p-6 rounded-lg shadow hover:bg-[#f3a847] transition-colors"
-        >
-            <h3 class="text-xl font-bold mb-2">View Active Loads</h3>
-            <p class="text-gray-700">Manage your current shipments</p>
-        </a>
-    </div>
+    const availableLoads = [
+    {
+        origin: 'Memphis, TN',
+        destination: 'Atlanta, GA',
+        pickupDate: 'Jan 25',
+        equipment: 'Dry Van 53',
+        weight: '42,000',
+        miles: '381',
+        rate: '1,250'
+    },
+    {
+        origin: 'Nashville, TN',
+        destination: 'Birmingham, AL',
+        pickupDate: 'Jan 26',
+        equipment: 'Dry Van 53',
+        weight: '38,000',
+        miles: '203',
+        rate: '850'
+    },
+    {
+        origin: 'Jackson, TN',
+        destination: 'Chattanooga, TN',
+        pickupDate: 'Jan 25',
+        equipment: 'Dry Van 53',
+        weight: '28,000',
+        miles: '295',
+        rate: '950'
+    }
+];
 
-    <!-- Recent Activity -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold text-[#232f3e] mb-4">Recent Activity</h2>
-        <div class="space-y-4">
-            <div class="flex items-center justify-between py-2 border-b">
-                <div>
-                    <p class="font-medium">Load #12345</p>
-                    <p class="text-sm text-gray-600">Memphis, TN → Atlanta, GA</p>
+const availableCapacity = [
+    {
+        origin: 'Atlanta, GA',
+        destination: 'Memphis, TN',
+        date: 'Jan 26',
+        equipment: 'Van 53',
+        maxWeight: '45,000',
+        targetRate: '3.25'
+    },
+    {
+        origin: 'Birmingham, AL',
+        destination: 'Nashville, TN',
+        date: 'Jan 27',
+        equipment: 'Refrigerated Van 53',
+        maxWeight: '45,000',
+        targetRate: '3.45'
+    },
+    {
+        origin: 'Chattanooga, TN',
+        destination: 'Jackson, TN',
+        date: 'Jan 26',
+        equipment: 'Van 53',
+        maxWeight: '45,000',
+        targetRate: '3.15'
+    }
+];
+    </script>
+    
+    <div class="min-h-screen bg-gray-50">
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-[#232f3e] to-[#37475A] text-white">
+            <div class="container mx-auto px-4 py-16">
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        Smart Cargo Freight Matching 
+                    </h1>
+                    <p class="text-xl mb-8 text-gray-300">
+                        Connect with verified carriers, track shipments in real-time, and process payments instantly with USDC integration.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="/register" class="bg-[#febd69] text-[#232f3e] px-8 py-3 rounded-md font-semibold hover:bg-[#f3a847] transition-colors">
+                            Get Started
+                        </a>
+                        <a href="/demo" class="border border-white px-8 py-3 rounded-md font-semibold hover:bg-white/10 transition-colors">
+                            Watch Demo
+                        </a>
+                    </div>
                 </div>
-                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                    In Transit
-                </span>
             </div>
-            <div class="flex items-center justify-between py-2 border-b">
-                <div>
-                    <p class="font-medium">Payment Received</p>
-                    <p class="text-sm text-gray-600">Load #12344</p>
+        </div>
+    
+        <!-- Stats Section -->
+        <div class="container mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <p class="text-4xl font-bold text-[#232f3e] mb-2">{stats.loads}+</p>
+                    <p class="text-gray-600">Monthly Loads</p>
                 </div>
-                <span class="text-[#232f3e] font-medium">$1,250.00</span>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <p class="text-4xl font-bold text-[#232f3e] mb-2">{stats.carriers}</p>
+                    <p class="text-gray-600">Verified Carriers</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <p class="text-4xl font-bold text-[#232f3e] mb-2">{stats.radius}</p>
+                    <p class="text-gray-600">Mile Radius</p>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Features Section -->
+        <div class="container mx-auto px-4 py-16">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#232f3e]">Why Choose CargoZig</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow">
+                    <div class="text-[#febd69] mb-4">
+                        <Icon icon="mdi:truck-check" width="48" />
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">IoT-Enabled Tracking</h3>
+                    <p class="text-gray-600">Real-time visibility with smart camera systems and ELD integration.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow">
+                    <div class="text-[#febd69] mb-4">
+                        <Icon icon="mdi:cash-fast" width="48" />
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Instant USDC Payments</h3>
+                    <p class="text-gray-600">Same-day payments with smart contract automation and USDC integration.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow">
+                    <div class="text-[#febd69] mb-4">
+                        <Icon icon="mdi:route" width="48" />
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Smart Route Matching</h3>
+                    <p class="text-gray-600">AI-powered load matching based on your routes and preferences.</p>
+                </div>
+            </div>
+        </div>
+    
+        <!-- CTA Section -->
+        <div class="bg-[#232f3e] text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-6">Ready to Optimize Your Freight?</h2>
+                <p class="text-xl mb-8 text-gray-300">Join carriers earning more with smart route optimization.</p>
+                <a href="/register" class="bg-[#febd69] text-[#232f3e] px-8 py-3 rounded-md font-semibold hover:bg-[#f3a847] transition-colors inline-block">
+                    Start Now
+                </a>
+            </div>
+        </div>
+        <!--Sample cards-->
+        <div class="container mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Available Loads Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-[#232f3e] mb-6">Available Loads</h2>
+                    <div class="grid gap-4">
+                        {#each availableLoads as load}
+                            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg">{load.origin} → {load.destination}</h3>
+                                        <p class="text-gray-600 text-sm">Pickup: {load.pickupDate}</p>
+                                        <p class="text-gray-600 text-sm">Equipment: {load.equipment}</p>
+                                        <div class="mt-2 flex gap-2">
+                                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                                                {load.weight} lbs
+                                            </span>
+                                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                                {load.miles} miles
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-2xl font-bold text-[#232f3e]">${load.rate}</p>
+                                        <p class="text-sm text-gray-600">${(load.rate / load.miles).toFixed(2)}/mile</p>
+                                        <button class="mt-2 bg-[#febd69] text-[#232f3e] px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#f3a847] transition-colors">
+                                            Bid Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+        
+                <!-- Available Capacity Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-[#232f3e] mb-6">Available Capacity</h2>
+                    <div class="grid gap-4">
+                        {#each availableCapacity as capacity}
+                            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg">{capacity.origin} → {capacity.destination}</h3>
+                                        <p class="text-gray-600 text-sm">Available: {capacity.date}</p>
+                                        <p class="text-gray-600 text-sm">{capacity.equipment}</p>
+                                        <div class="mt-2 flex gap-2">
+                                            <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
+                                                {capacity.maxWeight} lbs max
+                                            </span>
+                                            <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
+                                                IoT Equipped
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-2xl font-bold text-[#232f3e]">${capacity.targetRate}/mi</p>
+                                        <button class="mt-2 bg-[#232f3e] text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#37475A] transition-colors">
+                                            Book Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
