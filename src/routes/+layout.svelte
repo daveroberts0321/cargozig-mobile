@@ -5,11 +5,13 @@
     import { page } from '$app/stores';
     import { App } from '@capacitor/app';
     import { Network } from '@capacitor/network';
+    import logo from '$lib/assets/goldlogo.png';
 
     let { children } = $props();
     let isOnline = $state(true);
     let isMenuOpen = $state(false);
 
+    
     onMount(async () => {
         try {
             const status = await Network.getStatus();
@@ -28,6 +30,7 @@
             console.error('Capacitor error:', error);
         }
     });
+
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
@@ -68,7 +71,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <a href="/" class="text-[#febd69] font-bold text-xl">CargoZig</a>
+                <a href="/" class="flex items-center space-x-2">
+                    <img src={logo} alt="CargoZig Logo" class="h-20 w-35" />
+                </a>
             </div>
 
             <nav class="hidden lg:flex space-x-6">
@@ -207,7 +212,9 @@
     <div class="container mx-auto px-4 py-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                            <h3 class="font-bold mb-4">Company</h3>
+                        <a href="/" class="flex items-center space-x-2">
+                            <img src={logo} alt="CargoZig Logo" class="h-20 w-35" />
+                        </a>
                             <ul class="space-y-2 text-sm">
                                     <li><a href="/about" class="hover:text-[#febd69]">About CargoZig</a></li>
                                     <li><a href="/careers" class="hover:text-[#febd69]">Careers</a></li>
