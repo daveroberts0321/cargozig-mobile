@@ -90,14 +90,15 @@ const availableCapacity = [
     
     <div class="min-h-screen bg-gray-50">
         <!-- Hero Section -->
-        <div class="bg-gradient-to-r from-[#232f3e] to-[#37475A] text-white">
-            <div class="container mx-auto px-4 py-16">
-                <div class="max-w-3xl">
+        <div class="bg-gradient-to-r from-[#232f3e] to-[#37475A] text-white relative overflow-hidden">
+            <div class="container mx-auto px-4 py-16 flex justify-between items-center">
+                <!-- Text Content -->
+                <div class="max-w-xl z-10 backdrop-blur-sm bg-black/30 p-8 rounded-lg">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        Smart Cargo Freight Matching 
+                        Smart Freight Matching with IoT Intelligence
                     </h1>
                     <p class="text-xl mb-8 text-gray-300">
-                        Connect with verified carriers, track shipments in real-time, and process payments instantly with USDC integration.
+                        CargoZig is a Licensed Bonded and Insured Digital Freight Broker servicing West Tennessee and the surrounding areas.
                     </p>
                     <div class="flex gap-4">
                         <a href="/register" class="bg-[#febd69] text-[#232f3e] px-8 py-3 rounded-md font-semibold hover:bg-[#f3a847] transition-colors">
@@ -108,9 +109,17 @@ const availableCapacity = [
                         </a>
                     </div>
                 </div>
+                
+                <!-- Hero Image -->
+                <div class="hidden md:block w-1/2 h-[600px] relative">
+                    <img 
+                        src="https://picsum.photos/800/600" 
+                        alt="Logistics" 
+                        class="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl"
+                    />
+                </div>
             </div>
         </div>
-    
         <!-- Stats Section -->
         <div class="container mx-auto px-4 py-16">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
