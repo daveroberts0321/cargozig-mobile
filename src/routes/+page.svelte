@@ -95,7 +95,7 @@ const availableCapacity = [
                 <!-- Text Content -->
                 <div class="max-w-xl z-10 backdrop-blur-sm bg-black/30 p-8 rounded-lg">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        Smart Freight Matching with IoT Intelligence
+                        Real-Time Freight Matching, Verified Clients
                     </h1>
                     <p class="text-xl mb-8 text-gray-300">
                         CargoZig is a Licensed Bonded and Insured Digital Freight Broker servicing West Tennessee and the surrounding areas.
