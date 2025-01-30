@@ -7,10 +7,12 @@
     import { Network } from '@capacitor/network';
     import logo from '$lib/assets/goldlogo.png';
 
-    let { children } = $props();
-    let isOnline = $state(true);
-    let isMenuOpen = $state(false);
+    let isOnline = true;
+    let isMenuOpen = false;
 
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(`./src/service-worker/index.ts`);
+    }
     
     onMount(async () => {
         try {
@@ -138,6 +140,7 @@
     </header>
 
     {#if isMenuOpen}
+        <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
         <div 
             role="dialog"
             aria-modal="true"
@@ -196,7 +199,7 @@
     {/if}
 
     <main class="container mx-auto px-4 py-6">
-        {@render children()}
+        <slot />
     </main>
 
 <!-- Footer -->
@@ -247,13 +250,13 @@
                             <h3 class="font-bold mb-4">Download Our App</h3>
                             <div class="space-y-2">
                                     <a 
-                                            href="#" 
+                                            href="/" 
                                             class="block bg-[#febd69] text-[#232f3e] px-4 py-2 rounded-lg hover:bg-[#f3a847] text-center text-sm font-medium"
                                     >
                                             App Store
                                     </a>
                                     <a 
-                                            href="#" 
+                                            href="/" 
                                             class="block bg-[#febd69] text-[#232f3e] px-4 py-2 rounded-lg hover:bg-[#f3a847] text-center text-sm font-medium"
                                     >
                                             Google Play

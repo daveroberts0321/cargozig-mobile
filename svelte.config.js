@@ -11,6 +11,9 @@ const config = {
             fallback: 'index.html',
             precompress: false
         }),
+        serviceWorker: {
+            register: true  // or true, depending on if you want SvelteKit to auto-register
+        },
         alias: {
             $components: 'src/lib/components',
             $stores: 'src/lib/stores'

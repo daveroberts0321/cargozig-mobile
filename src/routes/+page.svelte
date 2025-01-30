@@ -202,8 +202,8 @@ function getStarArray(rating: number) {
         <!-- CTA Section -->
         <div class="bg-[#232f3e] text-white py-16">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold mb-6">Ready to Optimize Your Freight?</h2>
-                <p class="text-xl mb-8 text-gray-300">Join carriers earning more with smart route optimization.</p>
+                <h2 class="text-3xl font-bold mb-6">Ready to Optimize Your Freight Shipments?</h2>
+                <p class="text-xl mb-8 text-gray-300">Streamlined Shipments, Verified Carriers, Automated Documentation, and Real-Time Tracking, All in One Place.</p>
                 <a href="/register" class="bg-[#febd69] text-[#232f3e] px-8 py-3 rounded-md font-semibold hover:bg-[#f3a847] transition-colors inline-block">
                     Start Now
                 </a>
